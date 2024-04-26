@@ -1,0 +1,99 @@
+let readlineSync = require('readline-sync')
+
+function mostrarMenu(){
+ 
+    console.log("===== ABRIGOS TEMPORÁRIOS =====")
+    console.log("1. Cadastrar abrigo")
+    console.log("2. Listar abrigos")
+    console.log("3. Procurar abrigo")
+    console.log("4. Sair")
+    console.log('===============================')
+    }
+    
+let escopoGlobal = []
+    
+    
+
+  // cadastrar abrigos  
+ function cadastro() {
+    console.log('\n------ CADASTRO DE ABRIGO ------')
+        let nome = readlineSync.question("Nome: ")
+        let endereço = readlineSync.question("Endereço: ")
+        let telefone = readlineSync.question("Telefone: ")
+        let capacidade = readlineSync.question("Capacidade de lotação do abrigo: ")
+        let cidade = readlineSync.question("Cidade: ")
+        
+        //
+        let objetos = {
+            nome: nome,
+            endereço: endereço,
+            telefone: telefone ,
+            capacidade: capacidade, 
+            cidade: cidade
+        }
+
+        escopoGlobal.push(objetos)
+       
+    
+    }
+
+  //listar os abrigos cadastrados  
+function listagem(){
+    
+    console.log("--------------------------------------------------------------------------------------------------------------------------------------------")
+    console.log("                                                        LISTAGEM DE ABRIGOS:                      ")
+    console.log("--------------------------------------------------------------------------------------------------------------------------------------------")
+
+    if(escopoGlobal.length === 0){
+        console.log('')
+    } else {
+        for(let i = 0; i < escopoGlobal.length; i++) {
+
+        console.log(` ${i}     | NOME: ${EscopoGlobal[i].nome}  |   ENDEREÇO: ${EscopoGlobal[i].endereço}  |  TELEFONE: ${EscopoGlobal[i].telefone} | CAPACIDADE: ${EscopoGlobal[i].capacidade}  |  CIDADE: ${EscopoGlobal[i].cidade}`)
+    }
+    
+    console.log("--------------------------------------------------------------------------------------------------------------------------------------------")
+    }
+}
+//procurar abrigo    
+function pesquisarAbrigo(){
+    console.log('\n-------------- PROCURAR ABRIGO ---------------------------')
+    let pesquisa = readlineSync.question("Qual cidade você esta? ")
+        
+    
+
+    for (let i = 0; i <escopoGlobal.length; i++) {
+        if (escopoGlobal[i].cidade === pesquisa) {
+            console.log(`CÓDIGO: ${i} | NOME: ${escopoGlobal[i].nome} | TELEFONE: ${escopoGlobal[i].telefone}`);
+        }
+    }
+    console.log("-----------------------------------------------------------\n");
+}
+   
+    
+    function escolha(){
+        let continua = true
+
+    while (continua) {
+        mostrarMenu()
+        let opcao = readlineSync.question('ESCOLHA UMA OPCAO:')
+
+        switch (opcao) {
+            case '1':
+                cadastro()
+                break;
+            case '2':
+                listagem()
+                break
+            case '3':
+               pesquisarAbrigo()
+                break;
+            case '4':
+                console.log('Encerramento')
+                continua = false
+            default:
+        }
+    }
+}
+    escolha()   
+    
